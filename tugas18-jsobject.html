@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <h2>JavaScript Object</h2>
+ 
+        <p id="learn"></p>
+
+        <script>
+            //Create an Object :
+            const person1 = {
+                firstName: "Elis",
+                lastName: "Lisa",
+                fullName: function() {
+                    return this.firstName + " " + this.lastName;
+                }
+            }
+            alert("Hai " + person1.firstName + " semangatt belajarr!");
+
+            document.getElementById("learn").innerHTML = person1.fullName();
+            
+        </script>
+    </body>
+</html>
