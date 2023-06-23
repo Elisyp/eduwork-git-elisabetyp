@@ -24,7 +24,7 @@
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 
-Cypress.Commands.add('login', (username, password) => {
+/*Cypress.Commands.add('login', (username, password) => {
     cy.clearCookies()
     cy.clearLocalStorage()
     cy.get('input[name="user_login"]').clear()
@@ -33,25 +33,26 @@ Cypress.Commands.add('login', (username, password) => {
     cy.get('input[name="user_password"]').clear()
     cy.get('input[name="user_password"]').type('password')
     cy.get('input[name="submit"]').click()
-});
+}); */
 
-Cypress.Commands.add('bayar', (amount, date, description) => {
+Cypress.Commands.add('checkout', (firstName, lastName, postalCode) => {
     cy.clearCookies()
     cy.clearLocalStorage()
+    cy.get('input[name="firstName"]').clear()
+    cy.get('input[name="firstName"]').type('elisabet')
+
+    cy.get('input[name="lastName"]').clear()
+    cy.get('input[name="lastName"]').type('yp')
+
+    cy.get('input[name="postalCode"]').clear()
+    cy.get('input[name="postalCode"]').type('77889')
+
+    cy.get('#continue').click()
+    //cy.get('.cart_quantity_label').contains('QTY')
+    cy.url().should('include', 'checkout-step-two.html')
     
-    cy.get('#sp_payee').select('Apple')
-    cy.get('#sp_account').select('Checking')
-
-    //cy.get('input[name="amount"]').clear()
-    cy.get('input[name="amount"]').type('100000')
-
-    cy.get('input[name="date"]').clear()
-    cy.get('input[name="date"]').type('2023-06-15')
-    cy.wait (2000)
-
-    cy.get('#sp_description').click({force: true})
-    cy.get('#sp_description').clear()
-    cy.get('#sp_description').type('buying')
-
-    cy.get('#pay_saved_payees').click()
+    cy.get('#finish').click()
+    cy.url().should('include', 'checkout-complete.html')
+    
+    cy.get('#back-to-products').click()
 });
