@@ -1,14 +1,14 @@
+import SearchPage from './search.page';
+
 const { Given, When, Then } = require('@badeball/cypress-cucumber-preprocessor');
 
 Given('I open the website page', () => {
-    cy.visit('http://zero.webappsecurity.com/index.html');
-    cy.url().should('include', 'index.html')
+    SearchPage.visit();
+    SearchPage.verifyUrl();
 })
 
 When('I submit text into field Search', () => {
-    cy.get('#searchTerm').type('funds{enter}');
-
-    cy.wait(2000);
+    SearchPage.fillSearch('funds{enter}');
 })
 
 Then('I should see the Search Results', () => {
